@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
 
 class InputScreen extends StatelessWidget {
@@ -118,7 +119,15 @@ class InputScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       // TODO: タップで計算結果画面に遷移する
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const ResultScreen();
+                            },
+                          ),
+                        );
+                      },
                       child: const Text('計算'),
                     ),
                   ],
