@@ -7,11 +7,33 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('結果画面'),
+        title: const Text('BMI Calc App'),
       ),
-      body: const Center(
+      body: Center(
         // 画面全体のColumn
-        child: Text('結果画面'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'あなたのBMIは',
+              style: TextStyle(fontSize: 24),
+            ),
+            Text(
+              '18',
+              style: TextStyle(
+                // TODO: 結果によって色を変更する
+                fontSize: 64,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              // TODO: 計算結果によって文言を変更する
+              '「低体重」です。',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }
