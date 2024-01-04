@@ -1,11 +1,21 @@
-import 'package:calc_bmi_app/screen/result_screen.dart';
+import 'package:calc_bmi_app/result.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class InputScreen extends StatelessWidget {
+class InputScreen extends ConsumerWidget {
   const InputScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final heightFormKey = GlobalKey<FormState>();
+    final weightFormKey = GlobalKey<FormState>();
+    final TextEditingController heightController = TextEditingController();
+    final TextEditingController weightController = TextEditingController();
+
+    double height = 0.0;
+    double weight = 0.0;
+    double result = 0.0;
+
     return Center(
       // 画面全体のColumn
       child: Padding(
@@ -32,10 +42,22 @@ class InputScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 32),
                       Form(
+                        key: heightFormKey,
+                        autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
                           width: 180,
                           child: TextFormField(
-                            // TODO: 入力値を数字のみに制限する
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().isEmpty ||
+                                  double.parse(value) == 0.0) {
+                                return '身長を入力してください。';
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.number,
+                            controller: heightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
                               hintText: '165',
@@ -45,6 +67,9 @@ class InputScreen extends StatelessWidget {
                               ),
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {
+                              height = double.parse(value);
+                            },
                           ),
                         ),
                       ),
@@ -76,10 +101,22 @@ class InputScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 32),
                       Form(
+                        key: weightFormKey,
+                        autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
                           width: 180,
                           child: TextFormField(
-                            // TODO: 入力値を数字のみに制限する
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().isEmpty ||
+                                  double.parse(value) == 0.0) {
+                                return '体重を入力してください。';
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.number,
+                            controller: weightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
                               hintText: '55',
@@ -89,6 +126,9 @@ class InputScreen extends StatelessWidget {
                               ),
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {
+                              weight = double.parse(value);
+                            },
                           ),
                         ),
                       ),
@@ -109,8 +149,10 @@ class InputScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      // TODO: 入力値をクリアする処理を記述する
-                      onPressed: () {},
+                      onPressed: () {
+                        heightController.text = '';
+                        weightController.text = '';
+                      },
                       style: ElevatedButton.styleFrom(),
                       child: const Text('クリア'),
                     ),
@@ -120,13 +162,46 @@ class InputScreen extends StatelessWidget {
                     ElevatedButton(
                       // TODO: タップで計算結果画面に遷移する
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) {
+                        //       return ResultScreen();
+                        //     },
+                        //   ),
+                        // );
+                        if (height == 0.0 || weight == 0.0) {
+                          const snackBar = SnackBar(
+                            content: Text('身長、体重を正しく入力してください。'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          result = ref
+                              .watch(resultProvider.notifier)
+                              .calcBmi(height, weight);
+                          showDialog(
+                            context: context,
                             builder: (context) {
-                              return const ResultScreen();
+                              return AlertDialog(
+                                content: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'BMI',
+                                      style: TextStyle(fontSize: 24),
+                                    ),
+                                    Text(
+                                      '$result',
+                                      style: const TextStyle(
+                                        fontSize: 48,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
-                          ),
-                        );
+                          );
+                        }
                       },
                       child: const Text('計算'),
                     ),
