@@ -7,8 +7,6 @@ class ResultScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final result = ref.watch(resultProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI Calc App'),
@@ -23,7 +21,7 @@ class ResultScreen extends ConsumerWidget {
               style: TextStyle(fontSize: 20),
             ),
             Text(
-              '$result',
+              '${ref.watch(resultProvider)}',
               style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
