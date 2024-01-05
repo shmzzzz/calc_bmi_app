@@ -1,4 +1,6 @@
+import 'package:calc_bmi_app/bmi_data.dart';
 import 'package:calc_bmi_app/result.dart';
+import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +16,16 @@ class InputScreen extends ConsumerWidget {
 
     double height = 0.0;
     double weight = 0.0;
-    double result = 0.0;
+
+
+    // データの状態管理
+    final bmiDataProvider = StateProvider((ref) {
+      return const BmiData(
+        height: 0.0,
+        weight: 0.0,
+        result: 0.0,
+      );
+    });
 
     return Center(
       // 画面全体のColumn
@@ -160,46 +171,43 @@ class InputScreen extends ConsumerWidget {
                       width: 8,
                     ),
                     ElevatedButton(
-                      // TODO: タップで計算結果画面に遷移する
                       onPressed: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return ResultScreen();
-                        //     },
-                        //   ),
-                        // );
                         if (height == 0.0 || weight == 0.0) {
                           const snackBar = SnackBar(
                             content: Text('身長、体重を正しく入力してください。'),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {
-                          result = ref
-                              .watch(resultProvider.notifier)
-                              .calcBmi(height, weight);
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                content: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'BMI',
-                                      style: TextStyle(fontSize: 24),
-                                    ),
-                                    Text(
-                                      '$result',
-                                      style: const TextStyle(
-                                        fontSize: 48,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                          // Notifierを取得
+                          // 画面を触ったときの動作なので、Notifierをreadする
+                          final resultNotifier =
+                              ref.read(resultProvider.notifier);
+                          // // stateを更新
+                          // // final result = resultNotifier.calcBmi(height, weight);
+                          final result = resultNotifier.calcBmi(height, weight);
+
+                          // 更新前のデータ
+                          final data = ref.read(bmiDataProvider);
+                          // 更新後のデータ
+                          final newData = data.copyWith(
+                            height: height,
+                            weight: weight,
+                            result: result,
+                          );
+
+                          // 変更する
+                          ref.read(bmiDataProvider.notifier).state = newData;
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                // return ResultScreen(result: result);
+                                return ResultScreen(
+                                  bmiData:
+                                      ref.read(bmiDataProvider.notifier).state,
+                                );
+                              },
+                            ),
                           );
                         }
                       },
