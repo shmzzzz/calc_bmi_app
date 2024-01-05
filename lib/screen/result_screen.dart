@@ -7,6 +7,10 @@ class ResultScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final resultState = ref.watch(resultProvider);
+    final resultNotifier = ref.watch(resultProvider.notifier);
+    final obesity = resultNotifier.changeObesity(resultState);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI Calc App'),
@@ -21,16 +25,16 @@ class ResultScreen extends ConsumerWidget {
               style: TextStyle(fontSize: 20),
             ),
             Text(
-              '${ref.watch(resultProvider)}',
+              '$resultState',
               style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              '「低体重」です。',
-              style: TextStyle(fontSize: 20),
+            Text(
+              '「$obesity」です。',
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),
