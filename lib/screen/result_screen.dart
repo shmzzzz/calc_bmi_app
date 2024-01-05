@@ -1,14 +1,14 @@
-import 'package:calc_bmi_app/bmi_data.dart';
+import 'package:calc_bmi_app/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ResultScreen extends ConsumerWidget {
-  const ResultScreen({super.key, required this.bmiData});
-
-  final BmiData bmiData;
+  const ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final result = ref.watch(resultProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI Calc App'),
@@ -23,7 +23,7 @@ class ResultScreen extends ConsumerWidget {
               style: TextStyle(fontSize: 20),
             ),
             Text(
-              '${bmiData.result}',
+              '$result',
               style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
