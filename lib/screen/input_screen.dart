@@ -1,4 +1,3 @@
-import 'package:calc_bmi_app/bmi_data.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +16,7 @@ class InputScreen extends ConsumerWidget {
     double height = 0.0;
     double weight = 0.0;
 
-
-    // データの状態管理
-    final bmiDataProvider = StateProvider((ref) {
-      return const BmiData(
-        height: 0.0,
-        weight: 0.0,
-        result: 0.0,
-      );
-    });
+    ref.watch(resultProvider);
 
     return Center(
       // 画面全体のColumn
@@ -182,30 +173,13 @@ class InputScreen extends ConsumerWidget {
                           // 画面を触ったときの動作なので、Notifierをreadする
                           final resultNotifier =
                               ref.read(resultProvider.notifier);
-                          // // stateを更新
-                          // // final result = resultNotifier.calcBmi(height, weight);
-                          final result = resultNotifier.calcBmi(height, weight);
-
-                          // 更新前のデータ
-                          final data = ref.read(bmiDataProvider);
-                          // 更新後のデータ
-                          final newData = data.copyWith(
-                            height: height,
-                            weight: weight,
-                            result: result,
-                          );
-
-                          // 変更する
-                          ref.read(bmiDataProvider.notifier).state = newData;
+                          // 計算してstateを更新する
+                          resultNotifier.calcBmi(height, weight);
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                // return ResultScreen(result: result);
-                                return ResultScreen(
-                                  bmiData:
-                                      ref.read(bmiDataProvider.notifier).state,
-                                );
+                                return const ResultScreen();
                               },
                             ),
                           );
