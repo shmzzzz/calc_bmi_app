@@ -1,6 +1,7 @@
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class InputScreen extends ConsumerWidget {
@@ -52,21 +53,24 @@ class InputScreen extends ConsumerWidget {
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
+                                  value.startsWith('.') ||
                                   double.parse(value) == 0.0) {
                                 return '身長を入力してください。';
                               } else {
                                 return null;
                               }
                             },
-                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9.]') //数字とピリオドのみ入力可にする
+                                  ),
+                            ],
                             controller: heightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
                               hintText: '165',
                               hintStyle: TextStyle(fontSize: 14),
-                              prefixIcon: Icon(
-                                Icons.height,
-                              ),
+                              prefixIcon: Icon(Icons.height),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -111,13 +115,18 @@ class InputScreen extends ConsumerWidget {
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
+                                  value.startsWith('.') ||
                                   double.parse(value) == 0.0) {
                                 return '体重を入力してください。';
                               } else {
                                 return null;
                               }
                             },
-                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9.]') //数字とピリオドのみ入力可にする
+                                  ),
+                            ],
                             controller: weightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
