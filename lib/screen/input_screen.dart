@@ -32,23 +32,14 @@ class InputScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // 身長入力を促す文言
-                      const Text(
-                        '身長',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 32),
                       Form(
                         key: heightFormKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
-                          width: 180,
+                          width: 200,
                           child: TextFormField(
                             validator: (value) {
                               if (value == null ||
@@ -68,9 +59,13 @@ class InputScreen extends ConsumerWidget {
                             controller: heightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              floatingLabelAlignment:
+                                  FloatingLabelAlignment.start,
+                              labelText: '身長',
                               hintText: '165',
                               hintStyle: TextStyle(fontSize: 14),
-                              prefixIcon: Icon(Icons.height),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -79,7 +74,6 @@ class InputScreen extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
                       const Text(
                         'cm',
                         style: TextStyle(
@@ -91,26 +85,18 @@ class InputScreen extends ConsumerWidget {
                   ),
                 ),
                 // 体重入力を促す文言
-                const SizedBox(height: 8),
+                const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        '体重',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 32),
                       Form(
                         key: weightFormKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
-                          width: 180,
+                          width: 200,
                           child: TextFormField(
                             validator: (value) {
                               if (value == null ||
@@ -130,11 +116,13 @@ class InputScreen extends ConsumerWidget {
                             controller: weightController,
                             textAlign: TextAlign.center,
                             decoration: const InputDecoration(
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              floatingLabelAlignment:
+                                  FloatingLabelAlignment.start,
+                              labelText: '体重',
                               hintText: '55',
                               hintStyle: TextStyle(fontSize: 14),
-                              prefixIcon: Icon(
-                                Icons.monitor_weight,
-                              ),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -143,7 +131,6 @@ class InputScreen extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
                       const Text(
                         'kg',
                         style: TextStyle(
@@ -161,15 +148,13 @@ class InputScreen extends ConsumerWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        heightController.text = '';
-                        weightController.text = '';
+                        heightController.clear();
+                        weightController.clear();
                       },
                       style: ElevatedButton.styleFrom(),
                       child: const Text('クリア'),
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    const SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () {
                         if (height == 0.0 || weight == 0.0) {
