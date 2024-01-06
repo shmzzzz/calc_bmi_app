@@ -10,6 +10,8 @@ class ResultScreen extends ConsumerWidget {
     final resultState = ref.watch(resultProvider);
     final resultNotifier = ref.watch(resultProvider.notifier);
     final obesity = resultNotifier.changeObesity(resultState);
+    final textColor = resultNotifier.changeTextColor(obesity);
+    const defaultColor = Colors.black;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,18 +28,50 @@ class ResultScreen extends ConsumerWidget {
             ),
             Text(
               '$resultState',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
+                color: textColor,
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              '「$obesity」です。',
-              style: const TextStyle(fontSize: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const ObesityText(
+                  text: '「',
+                  textColor: defaultColor,
+                ),
+                ObesityText(
+                  text: obesity,
+                  textColor: textColor,
+                ),
+                const ObesityText(
+                  text: '」です。',
+                  textColor: defaultColor,
+                ),
+              ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ObesityText extends StatelessWidget {
+  const ObesityText({super.key, required this.text, required this.textColor});
+
+  final String text;
+  final Color textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 20,
+        color: textColor,
       ),
     );
   }
