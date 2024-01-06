@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/constants/colorls.dart';
 import 'package:calc_bmi_app/screen/input_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,15 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: AppBarColor.indigo,
         useMaterial3: false,
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData(
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: AppBarColor.indigo,
         useMaterial3: false,
         brightness: Brightness.dark,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.indigo),
+        appBarTheme: AppBarTheme(backgroundColor: AppBarColor.indigo),
       ),
       home: const MyHomePage(title: 'BMI Calc App'),
     );

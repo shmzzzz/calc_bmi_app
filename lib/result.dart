@@ -1,4 +1,4 @@
-import 'package:calc_bmi_app/constants/constants.dart';
+import 'package:calc_bmi_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -18,27 +18,27 @@ class Result extends _$Result {
   }
 
   String changeObesity(double result) {
-    if (result < 18.5) return Constants.underweight;
-    if (result < 25) return Constants.normalRange;
-    if (result < 30) return Constants.obeseClassOne;
-    if (result < 35) return Constants.obeseClassTwo;
-    if (result < 40) return Constants.obeseClassThree;
-    return Constants.obeseClassFour;
+    if (result < 18.5) return ObeStrings.underweight;
+    if (result < 25) return ObeStrings.normalRange;
+    if (result < 30) return ObeStrings.obeseClassOne;
+    if (result < 35) return ObeStrings.obeseClassTwo;
+    if (result < 40) return ObeStrings.obeseClassThree;
+    return ObeStrings.obeseClassFour;
   }
 
   Color changeTextColor(String obesity) {
     switch (obesity) {
-      case Constants.underweight:
+      case ObeStrings.underweight:
         return Colors.blue;
-      case Constants.normalRange:
+      case ObeStrings.normalRange:
         return Colors.green;
-      case Constants.obeseClassOne:
+      case ObeStrings.obeseClassOne:
         return const Color.fromARGB(255, 215, 200, 62);
-      case Constants.obeseClassTwo:
+      case ObeStrings.obeseClassTwo:
         return Colors.orange;
-      case Constants.obeseClassThree:
+      case ObeStrings.obeseClassThree:
         return Colors.red;
-      case Constants.obeseClassFour:
+      case ObeStrings.obeseClassFour:
         return Colors.purple;
       default:
         return Colors.black;

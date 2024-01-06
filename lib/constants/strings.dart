@@ -1,4 +1,4 @@
-class Constants {
+class ObeStrings {
   static const String underweight = '低体重';
   static const String normalRange = '普通体重';
   static const String obeseClassOne = '⚠️肥満(1度)';
