@@ -1,3 +1,5 @@
+import 'package:calc_bmi_app/constants/colors.dart';
+import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -7,7 +9,7 @@ part 'result.g.dart';
 @riverpod
 class Result extends _$Result {
   @override
-  double build() => 0.0;
+  double build() => Numbers.initial;
 
   void calcBmi(double height, double weight) {
     double calcHeight = height / 100.0;
@@ -29,19 +31,19 @@ class Result extends _$Result {
   Color changeTextColor(String obesity) {
     switch (obesity) {
       case ObeStrings.underweight:
-        return Colors.blue;
+        return TextColors.black;
       case ObeStrings.normalRange:
-        return Colors.green;
+        return TextColors.green;
       case ObeStrings.obeseClassOne:
-        return const Color.fromARGB(255, 215, 200, 62);
+        return TextColors.yellow;
       case ObeStrings.obeseClassTwo:
-        return Colors.orange;
+        return TextColors.orange;
       case ObeStrings.obeseClassThree:
-        return Colors.red;
+        return TextColors.red;
       case ObeStrings.obeseClassFour:
-        return Colors.purple;
+        return TextColors.purple;
       default:
-        return Colors.black;
+        return TextColors.black;
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ class InputScreen extends ConsumerWidget {
     final TextEditingController heightController = TextEditingController();
     final TextEditingController weightController = TextEditingController();
 
-    double height = 0.0;
-    double weight = 0.0;
+    double height = Numbers.initial;
+    double weight = Numbers.initial;
 
     ref.watch(resultProvider);
 
@@ -45,7 +46,7 @@ class InputScreen extends ConsumerWidget {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.startsWith('.') ||
-                                  double.parse(value) == 0.0) {
+                                  double.parse(value) == Numbers.initial) {
                                 return '身長を入力してください。';
                               } else {
                                 return null;
@@ -102,7 +103,7 @@ class InputScreen extends ConsumerWidget {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.startsWith('.') ||
-                                  double.parse(value) == 0.0) {
+                                  double.parse(value) == Numbers.initial) {
                                 return '体重を入力してください。';
                               } else {
                                 return null;
@@ -156,7 +157,8 @@ class InputScreen extends ConsumerWidget {
                     const SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () {
-                        if (height == 0.0 || weight == 0.0) {
+                        if (height == Numbers.initial ||
+                            weight == Numbers.initial) {
                           const snackBar = SnackBar(
                             content: Text('身長、体重を正しく入力してください。'),
                           );

@@ -1,1 +1,1 @@
-// marginとかfontSizeとか定義したい
+// marginとかpaddingとかfontSizeとか定義したい

@@ -1,3 +1,5 @@
+import 'package:calc_bmi_app/components/obesity_text.dart';
+import 'package:calc_bmi_app/constants/colors.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +13,6 @@ class ResultScreen extends ConsumerWidget {
     final resultNotifier = ref.watch(resultProvider.notifier);
     final obesity = resultNotifier.changeObesity(resultState);
     final textColor = resultNotifier.changeTextColor(obesity);
-    const defaultColor = Colors.black;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,40 +39,22 @@ class ResultScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ObesityText(
+                ObesityText(
                   text: '「',
-                  textColor: defaultColor,
+                  textColor: TextColors.black,
                 ),
                 ObesityText(
                   text: obesity,
                   textColor: textColor,
                 ),
-                const ObesityText(
+                ObesityText(
                   text: '」です。',
-                  textColor: defaultColor,
+                  textColor: TextColors.black,
                 ),
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ObesityText extends StatelessWidget {
-  const ObesityText({super.key, required this.text, required this.textColor});
-
-  final String text;
-  final Color textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 20,
-        color: textColor,
       ),
     );
   }

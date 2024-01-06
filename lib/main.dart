@@ -1,4 +1,4 @@
-import 'package:calc_bmi_app/constants/colorls.dart';
+import 'package:calc_bmi_app/constants/colors.dart';
 import 'package:calc_bmi_app/screen/input_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
