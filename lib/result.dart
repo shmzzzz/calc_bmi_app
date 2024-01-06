@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,27 +18,27 @@ class Result extends _$Result {
   }
 
   String changeObesity(double result) {
-    if (result < 18.5) return '低体重';
-    if (result < 25) return '普通体重';
-    if (result < 30) return '⚠️肥満(1度)';
-    if (result < 35) return '⚠️⚠️肥満(2度)';
-    if (result < 40) return '⚠️⚠️⚠️肥満(3度)';
-    return '⚠️⚠️⚠️⚠️肥満(4度)';
+    if (result < 18.5) return Constants.underweight;
+    if (result < 25) return Constants.normalRange;
+    if (result < 30) return Constants.obeseClassOne;
+    if (result < 35) return Constants.obeseClassTwo;
+    if (result < 40) return Constants.obeseClassThree;
+    return Constants.obeseClassFour;
   }
 
   Color changeTextColor(String obesity) {
     switch (obesity) {
-      case '低体重':
+      case Constants.underweight:
         return Colors.blue;
-      case '普通体重':
+      case Constants.normalRange:
         return Colors.green;
-      case '⚠️肥満(1度)':
+      case Constants.obeseClassOne:
         return const Color.fromARGB(255, 215, 200, 62);
-      case '⚠️⚠️肥満(2度)':
+      case Constants.obeseClassTwo:
         return Colors.orange;
-      case '⚠️⚠️⚠️肥満(3度)':
+      case Constants.obeseClassThree:
         return Colors.red;
-      case '⚠️⚠️⚠️⚠️肥満(4度)':
+      case Constants.obeseClassFour:
         return Colors.purple;
       default:
         return Colors.black;
