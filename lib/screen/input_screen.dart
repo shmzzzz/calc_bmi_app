@@ -151,7 +151,6 @@ class InputScreen extends ConsumerWidget {
                         heightController.clear();
                         weightController.clear();
                       },
-                      style: ElevatedButton.styleFrom(),
                       child: const Text('クリア'),
                     ),
                     const SizedBox(width: 8),
