@@ -1,3 +1,5 @@
+import 'package:calc_bmi_app/constants/dimens.dart';
+import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +16,15 @@ class InputScreen extends ConsumerWidget {
     final TextEditingController heightController = TextEditingController();
     final TextEditingController weightController = TextEditingController();
 
-    double height = 0.0;
-    double weight = 0.0;
+    double height = Numbers.initial;
+    double weight = Numbers.initial;
 
     ref.watch(resultProvider);
 
     return Center(
       // 画面全体のColumn
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(Paddings.padding_16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,7 +32,8 @@ class InputScreen extends ConsumerWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Paddings.padding_40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,13 +42,13 @@ class InputScreen extends ConsumerWidget {
                         key: heightFormKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
-                          width: 200,
+                          width: BoxSize.size_200,
                           child: TextFormField(
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.startsWith('.') ||
-                                  double.parse(value) == 0.0) {
+                                  double.parse(value) == Numbers.initial) {
                                 return '身長を入力してください。';
                               } else {
                                 return null;
@@ -65,7 +68,7 @@ class InputScreen extends ConsumerWidget {
                                   FloatingLabelAlignment.start,
                               labelText: '身長',
                               hintText: '165',
-                              hintStyle: TextStyle(fontSize: 14),
+                              hintStyle: TextStyle(fontSize: TextSize.size_16),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -77,7 +80,7 @@ class InputScreen extends ConsumerWidget {
                       const Text(
                         'cm',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: TextSize.size_16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -85,9 +88,10 @@ class InputScreen extends ConsumerWidget {
                   ),
                 ),
                 // 体重入力を促す文言
-                const SizedBox(height: 24),
+                const SizedBox(height: BoxSize.size_24),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Paddings.padding_40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,13 +100,13 @@ class InputScreen extends ConsumerWidget {
                         key: weightFormKey,
                         autovalidateMode: AutovalidateMode.always,
                         child: SizedBox(
-                          width: 200,
+                          width: BoxSize.size_200,
                           child: TextFormField(
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.startsWith('.') ||
-                                  double.parse(value) == 0.0) {
+                                  double.parse(value) == Numbers.initial) {
                                 return '体重を入力してください。';
                               } else {
                                 return null;
@@ -122,7 +126,7 @@ class InputScreen extends ConsumerWidget {
                                   FloatingLabelAlignment.start,
                               labelText: '体重',
                               hintText: '55',
-                              hintStyle: TextStyle(fontSize: 14),
+                              hintStyle: TextStyle(fontSize: TextSize.size_16),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -134,14 +138,14 @@ class InputScreen extends ConsumerWidget {
                       const Text(
                         'kg',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: TextSize.size_16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: BoxSize.size_32),
                 // ボタン部分
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -153,10 +157,11 @@ class InputScreen extends ConsumerWidget {
                       },
                       child: const Text('クリア'),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: BoxSize.size_8),
                     ElevatedButton(
                       onPressed: () {
-                        if (height == 0.0 || weight == 0.0) {
+                        if (height == Numbers.initial ||
+                            weight == Numbers.initial) {
                           const snackBar = SnackBar(
                             content: Text('身長、体重を正しく入力してください。'),
                           );

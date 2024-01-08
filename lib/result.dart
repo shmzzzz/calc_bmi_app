@@ -1,4 +1,6 @@
-import 'package:calc_bmi_app/constants/constants.dart';
+import 'package:calc_bmi_app/constants/colors.dart';
+import 'package:calc_bmi_app/constants/numbers.dart';
+import 'package:calc_bmi_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -7,7 +9,7 @@ part 'result.g.dart';
 @riverpod
 class Result extends _$Result {
   @override
-  double build() => 0.0;
+  double build() => Numbers.initial;
 
   void calcBmi(double height, double weight) {
     double calcHeight = height / 100.0;
@@ -18,30 +20,30 @@ class Result extends _$Result {
   }
 
   String changeObesity(double result) {
-    if (result < 18.5) return Constants.underweight;
-    if (result < 25) return Constants.normalRange;
-    if (result < 30) return Constants.obeseClassOne;
-    if (result < 35) return Constants.obeseClassTwo;
-    if (result < 40) return Constants.obeseClassThree;
-    return Constants.obeseClassFour;
+    if (result < 18.5) return ObeStrings.underweight;
+    if (result < 25) return ObeStrings.normalRange;
+    if (result < 30) return ObeStrings.obeseClassOne;
+    if (result < 35) return ObeStrings.obeseClassTwo;
+    if (result < 40) return ObeStrings.obeseClassThree;
+    return ObeStrings.obeseClassFour;
   }
 
   Color changeTextColor(String obesity) {
     switch (obesity) {
-      case Constants.underweight:
-        return Colors.blue;
-      case Constants.normalRange:
-        return Colors.green;
-      case Constants.obeseClassOne:
-        return const Color.fromARGB(255, 215, 200, 62);
-      case Constants.obeseClassTwo:
-        return Colors.orange;
-      case Constants.obeseClassThree:
-        return Colors.red;
-      case Constants.obeseClassFour:
-        return Colors.purple;
+      case ObeStrings.underweight:
+        return TextColors.black;
+      case ObeStrings.normalRange:
+        return TextColors.green;
+      case ObeStrings.obeseClassOne:
+        return TextColors.yellow;
+      case ObeStrings.obeseClassTwo:
+        return TextColors.orange;
+      case ObeStrings.obeseClassThree:
+        return TextColors.red;
+      case ObeStrings.obeseClassFour:
+        return TextColors.purple;
       default:
-        return Colors.black;
+        return TextColors.black;
     }
   }
 }
