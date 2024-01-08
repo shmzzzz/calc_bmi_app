@@ -1,4 +1,5 @@
 import 'package:calc_bmi_app/components/clear_button.dart';
+import 'package:calc_bmi_app/components/height_text_form.dart';
 import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/result.dart';
@@ -60,61 +61,12 @@ class InputScreen extends ConsumerWidget {
             // 入力部分のColumn
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Paddings.padding_40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Form(
-                        key: heightFormKey,
-                        autovalidateMode: AutovalidateMode.always,
-                        child: SizedBox(
-                          width: BoxSize.size_200,
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null ||
-                                  value.trim().isEmpty ||
-                                  value.startsWith('.') ||
-                                  double.parse(value) == Numbers.initial) {
-                                return '身長を入力してください。';
-                              } else {
-                                return null;
-                              }
-                            },
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]') //数字とピリオドのみ入力可にする
-                                  ),
-                            ],
-                            controller: heightController,
-                            textAlign: TextAlign.center,
-                            decoration: const InputDecoration(
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              floatingLabelAlignment:
-                                  FloatingLabelAlignment.start,
-                              labelText: '身長',
-                              hintText: '165',
-                              hintStyle: TextStyle(fontSize: TextSize.size_16),
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (value) {
-                              height = double.parse(value);
-                            },
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'cm',
-                        style: TextStyle(
-                          fontSize: TextSize.size_16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                HeightTextForm(
+                  heightFormKey: heightFormKey,
+                  heightController: heightController,
+                  onChanged: (value) {
+                    height = double.parse(value);
+                  },
                 ),
                 // 体重入力を促す文言
                 const SizedBox(height: BoxSize.size_24),
