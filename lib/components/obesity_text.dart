@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:flutter/material.dart';
 
 class ObesityText extends StatelessWidget {
@@ -11,7 +12,7 @@ class ObesityText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: TextSize.size_20,
         color: textColor,
       ),
     );

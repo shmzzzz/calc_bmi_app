@@ -1,5 +1,6 @@
 import 'package:calc_bmi_app/components/obesity_text.dart';
 import 'package:calc_bmi_app/constants/colors.dart';
+import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,17 +26,17 @@ class ResultScreen extends ConsumerWidget {
           children: [
             const Text(
               'あなたのBMIは',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: TextSize.size_20),
             ),
             Text(
               '$resultState',
               style: TextStyle(
-                fontSize: 48,
+                fontSize: TextSize.size_48,
                 fontWeight: FontWeight.bold,
                 color: textColor,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: BoxSize.size_8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
