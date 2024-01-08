@@ -97,6 +97,8 @@ class InputScreen extends ConsumerWidget {
                           height,
                           weight,
                         );
+                        heightController.dispose();
+                        weightController.dispose();
                       },
                       child: const Text(ButtonStrings.calcButton),
                     ),
