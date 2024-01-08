@@ -1,11 +1,11 @@
 import 'package:calc_bmi_app/components/clear_button.dart';
 import 'package:calc_bmi_app/components/height_text_form.dart';
+import 'package:calc_bmi_app/components/weight_text_form.dart';
 import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class InputScreen extends ConsumerWidget {
@@ -61,6 +61,7 @@ class InputScreen extends ConsumerWidget {
             // 入力部分のColumn
             Column(
               children: [
+                // 身長入力欄
                 HeightTextForm(
                   heightFormKey: heightFormKey,
                   heightController: heightController,
@@ -68,63 +69,14 @@ class InputScreen extends ConsumerWidget {
                     height = double.parse(value);
                   },
                 ),
-                // 体重入力を促す文言
                 const SizedBox(height: BoxSize.size_24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Paddings.padding_40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Form(
-                        key: weightFormKey,
-                        autovalidateMode: AutovalidateMode.always,
-                        child: SizedBox(
-                          width: BoxSize.size_200,
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null ||
-                                  value.trim().isEmpty ||
-                                  value.startsWith('.') ||
-                                  double.parse(value) == Numbers.initial) {
-                                return '体重を入力してください。';
-                              } else {
-                                return null;
-                              }
-                            },
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]') //数字とピリオドのみ入力可にする
-                                  ),
-                            ],
-                            controller: weightController,
-                            textAlign: TextAlign.center,
-                            decoration: const InputDecoration(
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              floatingLabelAlignment:
-                                  FloatingLabelAlignment.start,
-                              labelText: '体重',
-                              hintText: '55',
-                              hintStyle: TextStyle(fontSize: TextSize.size_16),
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (value) {
-                              weight = double.parse(value);
-                            },
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'kg',
-                        style: TextStyle(
-                          fontSize: TextSize.size_16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                // 体重入力欄
+                WeightTextForm(
+                  weightFormKey: weightFormKey,
+                  weightController: weightController,
+                  onChanged: (value) {
+                    weight = double.parse(value);
+                  },
                 ),
                 const SizedBox(height: BoxSize.size_32),
                 // ボタン部分
