@@ -1,3 +1,4 @@
+import 'package:calc_bmi_app/components/clear_button.dart';
 import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/constants/numbers.dart';
 import 'package:calc_bmi_app/result.dart';
@@ -20,6 +21,34 @@ class InputScreen extends ConsumerWidget {
     double weight = Numbers.initial;
 
     ref.watch(resultProvider);
+
+    void onCalculateButtonPressed(
+      BuildContext context,
+      WidgetRef ref,
+      double height,
+      double weight,
+    ) {
+      if (height == Numbers.initial || weight == Numbers.initial) {
+        const snackBar = SnackBar(
+          content: Text('身長、体重を正しく入力してください。'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        // Notifierを取得
+        // 画面を触ったときの動作なので、Notifierをreadする
+        final resultNotifier = ref.read(resultProvider.notifier);
+        // 計算してstateを更新する
+        resultNotifier.calcBmi(height, weight);
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const ResultScreen();
+            },
+          ),
+        );
+      }
+    }
 
     return Center(
       // 画面全体のColumn
@@ -150,38 +179,19 @@ class InputScreen extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        heightController.clear();
-                        weightController.clear();
-                      },
-                      child: const Text('クリア'),
+                    ClearButton(
+                      heightController: heightController,
+                      weightController: weightController,
                     ),
                     const SizedBox(width: BoxSize.size_8),
                     ElevatedButton(
                       onPressed: () {
-                        if (height == Numbers.initial ||
-                            weight == Numbers.initial) {
-                          const snackBar = SnackBar(
-                            content: Text('身長、体重を正しく入力してください。'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else {
-                          // Notifierを取得
-                          // 画面を触ったときの動作なので、Notifierをreadする
-                          final resultNotifier =
-                              ref.read(resultProvider.notifier);
-                          // 計算してstateを更新する
-                          resultNotifier.calcBmi(height, weight);
-
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const ResultScreen();
-                              },
-                            ),
-                          );
-                        }
+                        onCalculateButtonPressed(
+                          context,
+                          ref,
+                          height,
+                          weight,
+                        );
                       },
                       child: const Text('計算'),
                     ),
