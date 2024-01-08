@@ -31,7 +31,7 @@ class Result extends _$Result {
   Color changeTextColor(String obesity) {
     switch (obesity) {
       case ObeStrings.underweight:
-        return TextColors.black;
+        return TextColors.blue;
       case ObeStrings.normalRange:
         return TextColors.green;
       case ObeStrings.obeseClassOne:
