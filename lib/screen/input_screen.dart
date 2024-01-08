@@ -3,6 +3,7 @@ import 'package:calc_bmi_app/components/height_text_form.dart';
 import 'package:calc_bmi_app/components/weight_text_form.dart';
 import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/constants/numbers.dart';
+import 'package:calc_bmi_app/constants/strings.dart';
 import 'package:calc_bmi_app/result.dart';
 import 'package:calc_bmi_app/screen/result_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class InputScreen extends ConsumerWidget {
     ) {
       if (height == Numbers.initial || weight == Numbers.initial) {
         const snackBar = SnackBar(
-          content: Text('身長、体重を正しく入力してください。'),
+          content: Text(TextFormStrings.wholeError),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
@@ -97,7 +98,7 @@ class InputScreen extends ConsumerWidget {
                           weight,
                         );
                       },
-                      child: const Text('計算'),
+                      child: const Text(ButtonStrings.calcButton),
                     ),
                   ],
                 ),

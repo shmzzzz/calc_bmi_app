@@ -1,5 +1,6 @@
 import 'package:calc_bmi_app/constants/dimens.dart';
 import 'package:calc_bmi_app/constants/numbers.dart';
+import 'package:calc_bmi_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,7 +35,7 @@ class HeightTextForm extends StatelessWidget {
                       value.trim().isEmpty ||
                       value.startsWith('.') ||
                       double.parse(value) == Numbers.initial) {
-                    return '身長を入力してください。';
+                    return TextFormStrings.heightError;
                   } else {
                     return null;
                   }
@@ -49,8 +50,8 @@ class HeightTextForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   floatingLabelAlignment: FloatingLabelAlignment.start,
-                  labelText: '身長',
-                  hintText: '165',
+                  labelText: TextFormStrings.height,
+                  hintText: TextFormStrings.heightHint,
                   hintStyle: TextStyle(fontSize: TextSize.size_16),
                   border: OutlineInputBorder(),
                 ),
@@ -59,7 +60,7 @@ class HeightTextForm extends StatelessWidget {
             ),
           ),
           const Text(
-            'cm',
+            TextFormStrings.centimeter,
             style: TextStyle(
               fontSize: TextSize.size_16,
               fontWeight: FontWeight.bold,
