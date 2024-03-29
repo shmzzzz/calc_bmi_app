@@ -34,15 +34,15 @@
 
 | 画面表示時 | 入力時 |
 --- | ---
-<img width="" src="image.png"> | <img width="" src="image-1.png">
+<img width="" src="readme_files/image.png"> | <img width="" src="readme_files/image-1.png">
  
 **計算結果画面**
 
 | 低体重 | 普通体重 | 肥満(1度) |
  --- | --- | ---
-| ![alt text](image-2.png) | ![alt text](image-3.png) | ![alt text](image-4.png) |
+| ![alt text](readme_files/image-2.png) | ![alt text](readme_files/image-3.png) | ![alt text](readme_files/image-4.png) |
 
 
 | 肥満(2度) | 肥満(3度) | 肥満(4度) |
  --- | --- | ---
-| ![alt text](image-5.png) | ![alt text](image-6.png) | ![alt text](image-7.png) |
+| ![alt text](readme_files/image-5.png) | ![alt text](readme_files/image-6.png) | ![alt text](readme_files/image-7.png) |
