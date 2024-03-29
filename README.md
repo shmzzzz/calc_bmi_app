@@ -1,16 +1,48 @@
 # calc_bmi_app
+- Riverpod(v2.0)を使用して状態管理
+  - riverpod_generatorを使用
+  - Riverpodで行っていること
+    - 計算
+    - 肥満度の設定
+      - [厚生労働省](https://www.e-healthnet.mhlw.go.jp/information/food/e-02-001.html)の定義に従う
+    - 肥満度ごとの文字色の設定
 
-A new Flutter project.
+## フォルダ構成
+- libフォルダ配下の構成
+```
+.
+├── components
+│   ├── clear_button.dart
+│   ├── height_text_form.dart
+│   ├── obesity_text.dart
+│   └── weight_text_form.dart
+├── constants
+│   ├── colors.dart
+│   ├── dimens.dart
+│   ├── numbers.dart
+│   └── strings.dart
+├── main.dart
+├── result.dart
+├── result.g.dart
+└── screen
+    ├── input_screen.dart
+    └── result_screen.dart
+```
 
-## Getting Started
+## アプリデザイン
+**入力画面**
 
-This project is a starting point for a Flutter application.
+| 画面表示時 | 入力時 |
+--- | ---
+<img width="" src="image.png"> | <img width="" src="image-1.png">
+ 
+**計算結果画面**
 
-A few resources to get you started if this is your first Flutter project:
+| 低体重 | 普通体重 | 肥満(1度) |
+ --- | --- | ---
+| ![alt text](image-2.png) | ![alt text](image-3.png) | ![alt text](image-4.png) |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| 肥満(2度) | 肥満(3度) | 肥満(4度) |
+ --- | --- | ---
+| ![alt text](image-5.png) | ![alt text](image-6.png) | ![alt text](image-7.png) |
