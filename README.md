@@ -1,11 +1,11 @@
 # calc_bmi_app
-- Riverpod(v2.0)を使用して状態管理
-  - riverpod_generatorを使用
-  - Riverpodで行っていること
-    - 計算
-    - 肥満度の設定
-      - [厚生労働省](https://www.e-healthnet.mhlw.go.jp/information/food/e-02-001.html)の定義に従う
-    - 肥満度ごとの文字色の設定
+- 入力された身長、体重からBMIを計算するアプリ
+- 肥満度の設定は[厚生労働省](https://www.e-healthnet.mhlw.go.jp/information/food/e-02-001.html)の定義に従う
+
+## 使用技術
+![](https://img.shields.io/badge/flutter-v3.16.8-blue)
+![](https://img.shields.io/badge/flutter_riverpod-v2.3.7-blue)
+![](https://img.shields.io/badge/riverpod_annotation-v2.1.2-blue)
 
 ## フォルダ構成
 - libフォルダ配下の構成
@@ -37,6 +37,10 @@
 <img width="" src="readme_files/image.png"> | <img width="" src="readme_files/image-1.png">
  
 **計算結果画面**
+- Riverpodで行っていること
+  - 計算
+  - 肥満度(計算結果)の設定
+  - 肥満度ごとの文字色の設定
 
 | 低体重 | 普通体重 | 肥満(1度) |
  --- | --- | ---
